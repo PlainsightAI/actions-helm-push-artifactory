@@ -1,0 +1,26 @@
+name: 'Helm Push to Artifactory'
+description: 'Push a Helm Chart to Artifactory'
+inputs:
+  chart-path:
+    description: 'The path to the helm chart'
+    required: true
+  local-artifactory-repository:
+    description: 'The name of the local artifactory repository'
+    required: true
+  artifactory-username:
+    description: 'Your artifactory username'
+    required: true
+  artifactory-api-key:
+    description: 'Your artifactory API key'
+    required: true
+outputs:
+  output:
+    description: 'The command output'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.chart-path }}
+    - ${{ inputs.local-artifactory-repository }}
+    - ${{ inputs.artifactory-username }}
+    - ${{ inputs.artifactory-api-key }}
